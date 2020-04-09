@@ -34,8 +34,11 @@ void print(char *message) {
     print_at(message, -1, -1);
 }
 
-void println(char *message) {
-    print(message + '\n');
+void backspace() {
+    int offset = get_cursor_offset()-2;
+    int row = get_offset_row(offset);
+    int col = get_offset_col(offset);
+    print_char(0x08, col, row, WHITE_ON_BLACK);
 }
 
 int print_char(char c, int col, int row, char attr) {
@@ -56,6 +59,9 @@ int print_char(char c, int col, int row, char attr) {
     if (c == '\n') {
         row = get_offset_row(offset);
         offset = get_offset(0, row+1);
+    } else if (c == 0x08) { /* Backspace */
+        vidmem[offset] = ' ';
+        vidmem[offset+1] = attr;
     } else {
         vidmem[offset] = c;
         vidmem[offset+1] = attr;
