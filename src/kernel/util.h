@@ -5,5 +5,7 @@
 
 void mcopy(char* source, char* dest, int no_bytes);
 void mset(u8 *dest, u8 val, u32 len);
-void int_to_ascii(int n, char str[]);
+void itoa(int n, char str[]);
+void strrev(char s[]);
+int strlen(char s[]);
 #endif

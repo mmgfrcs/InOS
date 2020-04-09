@@ -4,11 +4,13 @@
 #include "../cpu/x86/isr.h"
 
 void main() {
-    clear_screen();
     isr_install();
+    clear_screen();
     print("InOS Kernel has been loaded. Welcome!\n");
     /* Test the interrupts */
-    __asm__ __volatile__("int $2");
-    __asm__ __volatile__("int $3");
+    asm volatile("sti");
+    init_timer(100);
+/* Comment out the timer IRQ handler to read
+ * the keyboard IRQs easier */
 
 }
